@@ -6,6 +6,8 @@ $params = array_merge(
     require(__DIR__ . '/params-local.php')
 );
 
+Yii::setAlias('@tests', __DIR__ . '/../../tests');
+
 return [
     'id' => 'app-console',
     'basePath' => dirname(__DIR__),
@@ -13,6 +15,14 @@ return [
     'controllerNamespace' => 'console\controllers',
     'modules' => [
         'gii' => 'yii\gii\Module',
+    ],
+    'controllerMap' => [
+        'fixture' => [
+            'class' => 'yii\faker\FixtureController',
+            'namespace' => 'tests\codeception\common\fixtures',
+            'fixtureDataPath' => '@tests/codeception/common/fixtures/data',
+            'templatePath' => '@tests/codeception/common/templates/fixtures',
+        ],
     ],
     'components' => [
         'log' => [

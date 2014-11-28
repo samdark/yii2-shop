@@ -46,9 +46,10 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-
+            [['phone', 'email'], 'required'],
             [['notes'], 'string'],
-            [['phone', 'email'], 'string', 'max' => 255]
+            [['phone', 'email'], 'string', 'max' => 255],
+            [['email'], 'email'],
         ];
     }
 

@@ -29,6 +29,9 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'cart' => [
+            'class' => 'yz\shoppingcart\ShoppingCart',
+        ],
     ],
     'params' => $params,
 ];

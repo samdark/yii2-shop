@@ -32,7 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'parent_id',
             'title',
             'slug',
-            'level',
         ],
     ]) ?>
 

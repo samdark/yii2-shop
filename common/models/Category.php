@@ -12,7 +12,6 @@ use yii\behaviors\SluggableBehavior;
  * @property integer $parent_id
  * @property string $title
  * @property string $slug
- * @property integer $level
  *
  * @property Category $parent
  * @property Category[] $categories
@@ -60,7 +59,6 @@ class Category extends \yii\db\ActiveRecord
             'parent_id' => 'Parent',
             'title' => 'Title',
             'slug' => 'Slug',
-            'level' => 'Level',
         ];
     }
 
@@ -87,20 +85,4 @@ class Category extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Product::className(), ['category_id' => 'id']);
     }
-
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-            if (!empty($this->parent_id)) {
-                $this->level = $this->parent->level + 1;
-            } else {
-                $this->level = 0;
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
 }

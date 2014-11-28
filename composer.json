@@ -17,7 +17,8 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": "*",
         "yiisoft/yii2-bootstrap": "*",
-        "yiisoft/yii2-swiftmailer": "*"
+        "yiisoft/yii2-swiftmailer": "*",
+        "omnilight/yii2-shopping-cart": "~1.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

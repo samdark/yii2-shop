@@ -1,10 +1,11 @@
 <?php
 use \yii\helpers\Html;
+use \yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $products common\models\Product[] */
 ?>
-<h1>Your cart</h1>
+<h1>Your order</h1>
 
 <div class="container-fluid">
     <div class="row">
@@ -20,9 +21,6 @@ use \yii\helpers\Html;
         <div class="col-xs-2">
             Cost
         </div>
-        <div class="col-xs-2">
-
-        </div>
     </div>
     <?php foreach ($products as $product):?>
     <div class="row">
@@ -34,15 +32,9 @@ use \yii\helpers\Html;
         </div>
         <div class="col-xs-2">
             <?= $quantity = $product->getQuantity()?>
-
-            <?= Html::a('-', ['cart/update', 'id' => $product->getId(), 'quantity' => $quantity - 1], ['class' => 'btn btn-danger', 'disabled' => ($quantity - 1) < 1])?>
-            <?= Html::a('+', ['cart/update', 'id' => $product->getId(), 'quantity' => $quantity + 1], ['class' => 'btn btn-success'])?>
         </div>
         <div class="col-xs-2">
             $<?= $product->getCost() ?>
-        </div>
-        <div class="col-xs-2">
-            <?= Html::a('×', ['cart/remove', 'id' => $product->getId()], ['class' => 'btn btn-danger'])?>
         </div>
     </div>
     <?php endforeach ?>
@@ -53,8 +45,27 @@ use \yii\helpers\Html;
         <div class="col-xs-2">
             Total: $<?= $total ?>
         </div>
-        <div class="col-xs-2">
-            <?= Html::a('Order', ['cart/order'], ['class' => 'btn btn-success'])?>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <?php
+            /* @var $form ActiveForm */
+            $form = ActiveForm::begin([
+                'id' => 'order-form',
+            ]) ?>
+
+            <?= $form->field($order, 'phone') ?>
+            <?= $form->field($order, 'email') ?>
+            <?= $form->field($order, 'notes')->textarea() ?>
+
+            <div class="form-group row">
+                <div class="col-xs-12">
+                    <?= Html::submitButton('Order', ['class' => 'btn btn-primary']) ?>
+                </div>
+            </div>
+
+            <?php ActiveForm::end() ?>
         </div>
     </div>
 </div>

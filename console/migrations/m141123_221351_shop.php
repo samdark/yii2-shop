@@ -18,7 +18,6 @@ class m141123_221351_shop extends Migration
             'parent_id' => Schema::TYPE_INTEGER,
             'title' => Schema::TYPE_STRING,
             'slug' => Schema::TYPE_STRING,
-            'level' => Schema::TYPE_INTEGER,
         ], $tableOptions);
 
         $this->addForeignKey('fk-category-parent_id-category-id', '{{%category}}', 'parent_id', '{{%category}}', 'id', 'CASCADE');
@@ -57,7 +56,6 @@ class m141123_221351_shop extends Migration
             'title' => Schema::TYPE_STRING,
             'price' => Schema::TYPE_MONEY,
             'product_id' => Schema::TYPE_INTEGER,
-            'status' => Schema::TYPE_STRING,
             'quantity' => Schema::TYPE_FLOAT,
         ], $tableOptions);
 
