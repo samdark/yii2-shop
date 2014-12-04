@@ -5,7 +5,6 @@ namespace frontend\controllers;
 use common\models\Order;
 use common\models\OrderItem;
 use common\models\Product;
-use yii\data\ArrayDataProvider;
 use yz\shoppingcart\ShoppingCart;
 
 class CartController extends \yii\web\Controller
@@ -84,6 +83,8 @@ class CartController extends \yii\web\Controller
             \Yii::$app->cart->removeAll();
 
             \Yii::$app->session->addFlash('success', 'Thanks for your order. We\'ll contact you soon.');
+            $order->sendEmail();
+
             return $this->redirect('catalog/list');
         }
 

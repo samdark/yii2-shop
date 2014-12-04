@@ -97,4 +97,13 @@ class Order extends \yii\db\ActiveRecord
             self::STATUS_NEW => 'New',
         ];
     }
+
+    public function sendEmail()
+    {
+        return Yii::$app->mailer->compose('order', ['order' => $this])
+            ->setTo(Yii::$app->params['adminEmail'])
+            ->setFrom(Yii::$app->params['adminEmail'])
+            ->setSubject('New order #' . $this->id)
+            ->send();
+    }
 }

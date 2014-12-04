@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Markdown;
 ?>
 <?php /** @var $model \common\models\Product */ ?>
 <div class="col-xs-12 well">
@@ -13,7 +14,7 @@ use yii\helpers\Html;
     </div>
     <div class="col-xs-6">
         <h2><?= Html::encode($model->title) ?></h2>
-        <?= Yii::$app->formatter->asNtext($model->description) ?>
+        <?= Markdown::process($model->description) ?>
     </div>
 
     <div class="col-xs-4 price">
