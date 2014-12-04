@@ -3,7 +3,15 @@ use yii\helpers\Html;
 ?>
 <?php /** @var $model \common\models\Product */ ?>
 <div class="col-xs-12 well">
-    <div class="col-xs-8">
+    <div class="col-xs-2">
+        <?php
+        $images = $model->images;
+        if (isset($images[0])) {
+            echo Html::img($images[0]->getUrl(), ['width' => '100%']);
+        }
+        ?>
+    </div>
+    <div class="col-xs-6">
         <h2><?= Html::encode($model->title) ?></h2>
         <?= Yii::$app->formatter->asNtext($model->description) ?>
     </div>

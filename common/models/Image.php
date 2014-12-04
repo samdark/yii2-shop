@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "image".
@@ -39,5 +40,35 @@ class Image extends \yii\db\ActiveRecord
     public function getProduct()
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
+    }
+
+    /**
+     * @return string image hash
+     */
+    protected function getHash()
+    {
+        return md5($this->product_id . '-' . $this->id);
+    }
+
+    /**
+     * @return string path to image file
+     */
+    public function getPath()
+    {
+        return Yii::getAlias('@frontend/web/images/' . $this->getHash() . '.jpg');
+    }
+
+    /**
+     * @return string URL of the image
+     */
+    public function getUrl()
+    {
+        return Yii::getAlias('@frontendWebroot/images/' . $this->getHash() . '.jpg');
+    }
+
+    public function afterDelete()
+    {
+        unlink($this->getPath());
+        parent::afterDelete();
     }
 }

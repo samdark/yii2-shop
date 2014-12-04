@@ -72,7 +72,7 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return Image[]
      */
     public function getImages()
     {

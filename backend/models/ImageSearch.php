@@ -15,16 +15,6 @@ class ImageSearch extends Image
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
-        return [
-            [['id', 'product_id'], 'integer'],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
