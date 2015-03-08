@@ -53,6 +53,7 @@ class CatalogController extends \yii\web\Controller
 
     /**
      * @param Category[] $categories
+     * @param int $activeId
      * @return array
      */
     private function getMenuItems($categories, $activeId = null)
@@ -103,11 +104,13 @@ class CatalogController extends \yii\web\Controller
      * @param array $categoryIds
      * @return array $categoryIds
      */
-    private function getCategoryIds($categories, $categoryId, &$categoryIds = []) {
+    private function getCategoryIds($categories, $categoryId, &$categoryIds = [])
+    {
         foreach ($categories as $category) {
             if ($category->id == $categoryId || $category->parent_id == $categoryId) {
                 $categoryIds[] = $category->id;
-            } if (isset($categories[$categoryId]['items'])) {
+            }
+            if (isset($categories[$categoryId]['items'])) {
                 foreach ($categories[$categoryId]['items'] as $subCategoryId => $subCategory)
                 $this->getCategoryIds($categories, $subCategoryId, $categoryIds);
             }

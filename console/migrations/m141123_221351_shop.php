@@ -45,6 +45,7 @@ class m141123_221351_shop extends Migration
             'created_at' => Schema::TYPE_INTEGER,
             'updated_at' => Schema::TYPE_INTEGER,
             'phone' => Schema::TYPE_STRING,
+            'address' => Schema::TYPE_TEXT,
             'email' => Schema::TYPE_STRING,
             'notes' => Schema::TYPE_TEXT,
             'status' => Schema::TYPE_STRING,

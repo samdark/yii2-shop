@@ -65,6 +65,7 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
         return [
             'id' => 'ID',
             'title' => 'Title',
+            'slug' => 'Slug',
             'description' => 'Description',
             'category_id' => 'Category ID',
             'price' => 'Price',

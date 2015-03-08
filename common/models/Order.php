@@ -12,6 +12,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $phone
+ * @property string $address
  * @property string $email
  * @property string $notes
  * @property string $status
@@ -63,6 +64,7 @@ class Order extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'phone' => 'Phone',
+            'address' => 'Address',
             'email' => 'Email',
             'notes' => 'Notes',
             'status' => 'Status',
