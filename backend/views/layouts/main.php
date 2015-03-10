@@ -35,16 +35,27 @@ AppAsset::register($this);
                 ['label' => 'Website', 'url' => 'http://shop.local'],
                 ['label' => 'Categories', 'url' => ['/category/index']],
                 ['label' => 'Products', 'url' => ['/product/index']],
-                ['label' => 'Orders', 'url' => ['/order/index']]
+                ['label' => 'Orders', 'url' => ['/order/index']],
+				[
+                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post']
+                ]
             ];
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
             } else {
-                $menuItems[] = [
-                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post']
-                ];
+                $menuItems = [
+					['label' => 'Website', 'url' => 'http://shop.local'],
+					['label' => 'Categories', 'url' => ['/category/index']],
+					['label' => 'Products', 'url' => ['/product/index']],
+					['label' => 'Orders', 'url' => ['/order/index']],
+					[
+						'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+						'url' => ['/site/logout'],
+						'linkOptions' => ['data-method' => 'post']
+					]
+				];
             }
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
