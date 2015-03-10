@@ -19,7 +19,7 @@ class ProductController extends Controller
     public function behaviors()
     {
         return [
-			'access' => [
+            'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
