@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{view} {update} {images} {delete}',
                 'buttons' => [
                     'images' => function ($url, $model, $key) {
-                         return Html::a('<span class="glyphicon glyphicon glyphicon-picture" aria-hidden="true"></span>', Url::to(['image/index', 'id' => $model->id]));
+                         return Html::a('<span class="glyphicon glyphicon glyphicon-picture" aria-label="Image"></span>', Url::to(['image/index', 'id' => $model->id]));
                     }
                 ],
             ],
