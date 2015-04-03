@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ImageSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $form backend\models\MultipleUploadForm */
+/* @var $uploadForm backend\models\MultipleUploadForm */
 
 $this->title = $searchModel->product_id ? "Product #$searchModel->product_id images" : 'Images';
 $this->params['breadcrumbs'][] = $this->title;
