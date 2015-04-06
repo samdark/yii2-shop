@@ -4,11 +4,14 @@ namespace frontend\controllers;
 
 use common\models\Category;
 use common\models\Product;
+use common\traits\CategoryTrait;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 
 class CatalogController extends \yii\web\Controller
 {
+    use CategoryTrait;
+
     public function beforeAction($action)
     {
         if (parent::beforeAction($action)) {
@@ -25,6 +28,7 @@ class CatalogController extends \yii\web\Controller
         $category = null;
 
         $categories = Category::find()->indexBy('id')->orderBy('id')->all();
+
 
         $productsQuery = Product::find();
         if ($id !== null && isset($categories[$id])) {
@@ -54,67 +58,24 @@ class CatalogController extends \yii\web\Controller
     /**
      * @param Category[] $categories
      * @param int $activeId
+     * @param int $parent
      * @return array
      */
-    private function getMenuItems($categories, $activeId = null)
+
+    private function getMenuItems($categories, $activeId = null, $parent = null)
     {
         $menuItems = [];
         foreach ($categories as $category) {
-            if ($category->parent_id === null) {
+            if ($category->parent_id === $parent) {
                 $menuItems[$category->id] = [
                     'active' => $activeId === $category->id,
                     'label' => $category->title,
                     'url' => ['catalog/list', 'id' => $category->id],
+                    'items' => $this->getMenuItems($categories, $activeId, $category->id),
                 ];
-            } else {
-                $this->placeCategory($category, $menuItems, $activeId);
             }
         }
         return $menuItems;
     }
 
-    /**
-     * Places category menu item into menu tree
-     *
-     * @param Category $category
-     * @param $menuItems
-     * @param int $activeId
-     */
-    private function placeCategory($category, &$menuItems, $activeId = null)
-    {
-        foreach ($menuItems as $id => $navLink) {
-            if ($category->parent_id === $id) {
-                $menuItems[$id]['items'][$category->id] = [
-                    'active' => $activeId === $category->id,
-                    'label' => $category->title,
-                    'url' => ['catalog/list', 'id' => $category->id],
-                ];
-                break;
-            } elseif (!empty($menuItems[$id]['items'])) {
-                $this->placeCategory($category, $menuItems[$id]['items']);
-            }
-        }
-    }
-
-    /**
-     * Returns IDs of category and all its sub-categories
-     *
-     * @param Category[] $categories all categories
-     * @param int $categoryId id of category to start search with
-     * @param array $categoryIds
-     * @return array $categoryIds
-     */
-    private function getCategoryIds($categories, $categoryId, &$categoryIds = [])
-    {
-        foreach ($categories as $category) {
-            if ($category->id == $categoryId || $category->parent_id == $categoryId) {
-                $categoryIds[] = $category->id;
-            }
-            if (isset($categories[$categoryId]['items'])) {
-                foreach ($categories[$categoryId]['items'] as $subCategoryId => $subCategory)
-                $this->getCategoryIds($categories, $subCategoryId, $categoryIds);
-            }
-        }
-        return $categoryIds;
-    }
 }
