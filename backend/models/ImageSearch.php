@@ -36,12 +36,7 @@ class ImageSearch extends Image
             'query' => $query,
         ]);
 
-        if (!($this->load($params) && $this->validate())) {
-            return $dataProvider;
-        }
-
         $query->andFilterWhere([
-            'id' => $this->id,
             'product_id' => $this->product_id,
         ]);
 
