@@ -4,13 +4,11 @@ namespace frontend\controllers;
 
 use common\models\Category;
 use common\models\Product;
-use common\traits\CategoryTrait;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 
 class CatalogController extends \yii\web\Controller
 {
-    use CategoryTrait;
 
     public function beforeAction($action)
     {
@@ -33,7 +31,7 @@ class CatalogController extends \yii\web\Controller
         $productsQuery = Product::find();
         if ($id !== null && isset($categories[$id])) {
             $category = $categories[$id];
-            $productsQuery->where(['category_id' => $this->getCategoryIds($categories, $id)]);
+            $productsQuery->where(['category_id' => Category::getCategoryIds($categories, $id)]);
         }
 
         $productsDataProvider = new ActiveDataProvider([
