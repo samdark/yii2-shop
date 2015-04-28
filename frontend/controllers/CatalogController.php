@@ -107,12 +107,11 @@ class CatalogController extends \yii\web\Controller
     private function getCategoryIds($categories, $categoryId, &$categoryIds = [])
     {
         foreach ($categories as $category) {
-            if ($category->id == $categoryId || $category->parent_id == $categoryId) {
+            if ($category->id == $categoryId) {
                 $categoryIds[] = $category->id;
             }
-            if (isset($categories[$categoryId]['items'])) {
-                foreach ($categories[$categoryId]['items'] as $subCategoryId => $subCategory)
-                $this->getCategoryIds($categories, $subCategoryId, $categoryIds);
+            elseif ($category->parent_id == $categoryId){
+                $this->getCategoryIds($categories, $category->id, $categoryIds);
             }
         }
         return $categoryIds;
