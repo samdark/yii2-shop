@@ -91,7 +91,7 @@ class CatalogController extends \yii\web\Controller
                 ];
                 break;
             } elseif (!empty($menuItems[$id]['items'])) {
-                $this->placeCategory($category, $menuItems[$id]['items']);
+                $this->placeCategory($category, $menuItems[$id]['items'], $activeId);
             }
         }
     }
