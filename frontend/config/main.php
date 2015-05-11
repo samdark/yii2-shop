@@ -6,6 +6,9 @@ $params = array_merge(
     require(__DIR__ . '/params-local.php')
 );
 
+use \yii\web\Request;
+$baseUrl = str_replace('/frontend/web', '', (new Request)->getBaseUrl());
+
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
@@ -13,6 +16,9 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'defaultRoute' => 'catalog/list',
     'components' => [
+        'request' => [
+            'baseUrl' => $baseUrl,
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
@@ -32,6 +38,19 @@ return [
         'cart' => [
             'class' => 'yz\shoppingcart\ShoppingCart',
         ],
+        'urlManager' => [
+            'baseUrl' => $baseUrl,
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => []
+        ],
+        'urlManagerBackEnd' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '/yii2-shop/admin',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
+
     ],
     'params' => $params,
 ];
