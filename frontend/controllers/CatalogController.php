@@ -54,47 +54,25 @@ class CatalogController extends \yii\web\Controller
     /**
      * @param Category[] $categories
      * @param int $activeId
+     * @param int $parent
      * @return array
      */
-    private function getMenuItems($categories, $activeId = null)
+    private function getMenuItems($categories, $activeId = null, $parent = null)
     {
         $menuItems = [];
         foreach ($categories as $category) {
-            if ($category->parent_id === null) {
+            if ($category->parent_id === $parent) {
                 $menuItems[$category->id] = [
                     'active' => $activeId === $category->id,
                     'label' => $category->title,
                     'url' => ['catalog/list', 'id' => $category->id],
+                    'items' => $this->getMenuItems($categories, $activeId, $category->id),
                 ];
-            } else {
-                $this->placeCategory($category, $menuItems, $activeId);
             }
         }
         return $menuItems;
     }
 
-    /**
-     * Places category menu item into menu tree
-     *
-     * @param Category $category
-     * @param $menuItems
-     * @param int $activeId
-     */
-    private function placeCategory($category, &$menuItems, $activeId = null)
-    {
-        foreach ($menuItems as $id => $navLink) {
-            if ($category->parent_id === $id) {
-                $menuItems[$id]['items'][$category->id] = [
-                    'active' => $activeId === $category->id,
-                    'label' => $category->title,
-                    'url' => ['catalog/list', 'id' => $category->id],
-                ];
-                break;
-            } elseif (!empty($menuItems[$id]['items'])) {
-                $this->placeCategory($category, $menuItems[$id]['items'], $activeId);
-            }
-        }
-    }
 
     /**
      * Returns IDs of category and all its sub-categories
