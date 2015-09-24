@@ -62,7 +62,7 @@ You can then install the application using the following command:
 
 ~~~
 git clone git@github.com:samdark/yii2-shop.git
-composer global require "fxp/composer-asset-plugin:1.0.0"
+composer global require "fxp/composer-asset-plugin:~1.0.3"
 cd yii2-shop
 composer install
 ~~~
