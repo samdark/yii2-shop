@@ -2,43 +2,44 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\CategorySearch */
+/* @var $searchModel backend\models\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Categories';
+$this->title = 'Products';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="category-index">
-default
+<div class="product-index">
+
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Category', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'id',
+            'title',
+            'description:ntext',
             [
-                'attribute' => 'parent_id',
+                'attribute' => 'category_id',
                 'value' => function ($model) {
-                    return empty($model->parent_id) ? '-' : $model->parent->title;
+                    return empty($model->category_id) ? '-' : $model->category->title;
                 },
             ],
-
-            'title',
+            'price',
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{create} {view} {update} {delete}',
+                'template' => '{view} {update} {images} {delete}',
                 'buttons' => [
-                    'create' => function ($url, $model, $key) {
-                         return Html::a('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>', $url);
+                    'images' => function ($url, $model, $key) {
+                         return Html::a('<span class="glyphicon glyphicon glyphicon-picture" aria-label="Image"></span>', Url::to(['image/index', 'id' => $model->id]));
                     }
                 ],
             ],

@@ -9,7 +9,7 @@ $this->title = Html::encode($title);
 ?>
 
 <h1><?= Html::encode($title) ?></h1>
-
+<?= Yii::$app->urlManagerBackEnd->createUrl('category/index'); ?>
 <div class="container-fluid">
   <div class="row">
       <div class="col-xs-4">
