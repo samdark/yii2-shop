@@ -30,7 +30,7 @@ class ImageSearch extends Image
      */
     public function search($params)
     {
-        $query = Image::find();
+		$query = Image::find()->where(['product_id' =>$params['id']]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -40,10 +40,7 @@ class ImageSearch extends Image
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'product_id' => $this->product_id,
-        ]);
+
 
         return $dataProvider;
     }
