@@ -1,7 +1,7 @@
 Yii 2 shop example project
 ==========================
 
-This is example project implementing a shop created to help people learn Yii 2.0. It was created during 8 hours workshop performed in Ekaterinburg, Russia. The idea was to show how to deal with Gii, grids, filtering and other Yii 2.0 usage. It is by no means a complete shop script. It may contain bugs, shortcuts etc.
+This is an example project implementing a shop created to help people learn Yii 2.0. It was created during 8 hours workshop performed in Ekaterinburg, Russia. The idea was to show how to deal with Gii, grids, filtering and other Yii 2.0 usage. It is by no means a complete shop script. It may contain bugs, shortcuts etc.
 
 > If you want to take over the project and develop it further, let @samdark know and you'll be granted permissions required.
 
@@ -59,7 +59,7 @@ INSTALLATION
 
 ### Install via Composer
 
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
+If you do not have [Composer](http://getcomposer.org/), you can install it by following the instructions
 at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
 
 You can then install the application using the following command:
